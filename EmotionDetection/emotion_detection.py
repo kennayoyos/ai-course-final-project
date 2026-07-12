@@ -10,6 +10,18 @@ def emotion_detector(text_to_analyze):
 
     # API call to the Watson NLP Library
     response = requests.post(url, json = input_json, headers = headers, timeout = 5)
+
+    # Error Handling
+    if response.status_code == 400:
+        return {
+            'anger': None,
+            'disgust': None,
+            'fear': None,
+            'joy': None,
+            'sadness': None,
+            'dominant_emotion': None
+        }
+
     json_response = json.loads(response.text)
     emotions = json_response['emotionPredictions'][0]['emotion']
 

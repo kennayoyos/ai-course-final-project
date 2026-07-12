@@ -9,10 +9,17 @@ def index_route():
 
 @app.route("/emotionDetector")
 def analyze_emotion():
+    # Get input
     text_to_analyze = request.args.get('textToAnalyze')
 
+    # Invoke emotion detector
     response = emotion_detector(text_to_analyze)
 
+    # Error Handling
+    if response['dominant_emotion'] is None:
+        return "Invalid text! Please try again!"
+
+    # Prepare final response output
     final_output = f"For the given statement, the system response is "\
     f"'anger': {response['anger']}, "\
     f"'disgust': {response['disgust']}, "\
