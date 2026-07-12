@@ -1,3 +1,4 @@
+'''This runs the backend server to host the Emotion Detector App'''
 from flask import Flask, request, render_template
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -5,10 +6,12 @@ app = Flask("Emotion Detector")
 
 @app.route("/")
 def index_route():
+    '''The main route of the web app'''
     return render_template('index.html')
 
 @app.route("/emotionDetector")
 def analyze_emotion():
+    '''The core route for detecting emotions'''
     # Get input
     text_to_analyze = request.args.get('textToAnalyze')
 
